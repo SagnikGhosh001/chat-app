@@ -14,11 +14,11 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  username  String   @unique
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  username  String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   messages  Message[]  @relation("user-message")
   userRooms UserRoom[] @relation("user-room")
 }
@@ -32,25 +32,25 @@ model Message {
   user      User     @relation("user-message", fields: [userId], references: [id])
   roomId    String   @db.ObjectId
   room      Room     @relation("room-message", fields: [roomId], references: [id])
-
 }
 
 model Room {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  roomId    String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  roomId    String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   messages  Message[]  @relation("room-message")
   userRooms UserRoom[] @relation("room-user")
 }
 
-model UserRoom{
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  user      User     @relation("user-room", fields: [userId], references: [id])
-  roomId    String   @db.ObjectId
-  room      Room     @relation("room-user", fields: [roomId], references: [id])
+model UserRoom {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String   @db.ObjectId
+  user     User     @relation("user-room", fields: [userId], references: [id])
+  roomId   String   @db.ObjectId
+  room     Room     @relation("room-user", fields: [roomId], references: [id])
   joinedAt DateTime @default(now())
-  @@unique([userId,roomId])
+
+  @@unique([userId, roomId])
 }

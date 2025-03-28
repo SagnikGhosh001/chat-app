@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@as-integrations/next": "^3.2.0",
+    "@graphql-tools/schema": "^10.0.23",
     "@prisma/client": "^6.5.0",
+    "bcryptjs": "^3.0.2",
+    "graphql-tag": "^2.12.6",
     "next": "15.2.4",
     "prisma": "^6.5.0",
     "react": "^19.0.0",
