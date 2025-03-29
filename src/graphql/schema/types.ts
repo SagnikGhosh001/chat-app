@@ -64,4 +64,11 @@ export const typeDefs = gql`
         leaveRoom(userId:ID!,roomId:ID!):RoomResponse!
         login(username:String!,password:String!):UserResponse!
     }
+
+    type Subscription{
+        messageAdded(roomId:ID!):MessageResponse!
+        userJoined(roomId:ID!):UserResponse!
+        userLeft(roomId:ID!):UserResponse!
+        roomCreated: RoomResponse!
+    }
 `

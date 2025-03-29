@@ -6,6 +6,8 @@ import { prisma } from '@/lib/prisma';
 import * as dotenv from "dotenv";
 import * as jwt from "jsonwebtoken";
 import { NextRequest } from 'next/server';
+import { client } from '@/lib/redis';
+
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET
 if(!JWT_SECRET){
@@ -37,7 +39,8 @@ const handler = startServerAndCreateNextHandler(apolloServer, {
         
         return {
             prisma, 
-            user,   
+            user,
+            client
         };
     },
 });
